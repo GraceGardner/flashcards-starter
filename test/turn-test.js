@@ -51,7 +51,7 @@ describe('Turn', function() {
     expect(turn.giveFeedback()).to.equal("correct!")
   })
 
-  it.skip('should give feedback for incorrect answers', function() {
+  it('should give feedback for incorrect answers', function() {
     const turn = new Turn("no", card);
     expect(turn.giveFeedback()).to.equal("incorrect!");
   })

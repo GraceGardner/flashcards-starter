@@ -25,9 +25,10 @@ class Turn {
   giveFeedback() {
     switch (this.evaluateGuess()) {
       case true:
-        return "correct!"
+        return "correct!";
         break;
       default:
+        return "incorrect!";
 
     }
   }
