@@ -2,32 +2,33 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Turn = require('../src/turn');
+const Card = require('../src/Card')
 
 describe('Turn', function() {
 
-  it.skip('should be a function', function() {
+  it('should be a function', function() {
     const turn = new Turn();
     expect(Turn).to.be.a('function');
   })
 
-  it.skip('should take guess', function() {
+  it('should take guess', function() {
     const turn = new Turn("yes");
     expect(turn.guess).to.equal("yes");
   })
 
-  it.skip('should hold a card', function() {
+  it('should hold a card', function() {
     const card = new Card(123, "Is this a question?", ["yes", "no"], "yes");
     const turn = new Turn("yes", card);
-    expect(turn.card.answer).to.equal("yes");
+    expect(turn.card.correctAnswer).to.equal("yes");
   })
 
-  it.skip('should be able to return a guess', function() {
+  it('should be able to return a guess', function() {
     const card = new Card(123, "Is this a question?", ["yes", "no"], "yes");
     const turn = new Turn("yes", card);
     expect(turn.returnGuess()).to.equal("yes");
   })
 
-  it.skip('should return a card', function() {
+  it('should return a card', function() {
     const card = new Card(123, "Is this a question?", ["yes", "no"], "yes");
     const turn = new Turn("yes", card);
     expect(turn.returnCard()).to.equal(card);
