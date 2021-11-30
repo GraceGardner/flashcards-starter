@@ -42,12 +42,12 @@ describe('Turn', function() {
     expect(turn.evaluateGuess()).to.equal(true);
   })
 
-  it.skip('should evaluate a incorrect guess', function() {
+  it('should evaluate a incorrect guess', function() {
     const turn = new Turn("no", card);
     expect(turn.evaluateGuess()).to.equal(false);
   })
 
-  it.skip('should give feedback for correct answers', function() {
+  it('should give feedback for correct answers', function() {
     expect(turn.giveFeedback()).to.equal("correct!")
   })
 

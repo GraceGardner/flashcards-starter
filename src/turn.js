@@ -21,6 +21,16 @@ class Turn {
       return false;
     }
   }
+
+  giveFeedback() {
+    switch (this.evaluateGuess()) {
+      case true:
+        return "correct!"
+        break;
+      default:
+
+    }
+  }
 }
 
 module.exports = Turn;
