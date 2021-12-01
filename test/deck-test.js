@@ -21,7 +21,7 @@ describe('Deck', () => {
     expect(Deck).to.be.a('function');
   })
 
-  it('should take a array of cards', () => {
+  it('should take an array of cards', () => {
     const deck = new Deck(cards);
     expect(deck.cards[0]).to.be.an.instanceof(Card);
   })
