@@ -13,23 +13,23 @@ describe('Round', () => {
   let turn;
 
   beforeEach(() => {
-    const cardOne = new Card(123, "Is this a question?", ["yes", "no"], "yes");
-    const cardTwo = new Card(124, "Is this question 2?", ["yes", "no"], "yes");
-    const cardThree = new Card(125, "Is this not question 3?", ["yes", "no"], "no");
-    const cardFour = new Card(125, "Is this not question 3?", ["yes", "no"], "yes");
-    cards = [cardOne, cardTwo, cardThree];
+    const cardOne = new Card(1, "Is this a question?", ["yes", "no"], "yes");
+    const cardTwo = new Card(2, "Is this question 2?", ["yes", "no"], "yes");
+    const cardThree = new Card(3, "Is this not question 3?", ["yes", "no"], "no");
+    const cardFour = new Card(4, "Is this not question 3?", ["yes", "no"], "yes");
+    cards = [cardOne, cardTwo, cardThree, cardFour];
     deck = new Deck(cards);
   })
 
 
 
   it('should be a function', () => {
-    const round = new Round();
+    const round = new Round(deck);
     expect(Round).to.be.a('function');
   })
 
   it('should record turns', () => {
-    const round = new Round();
+    const round = new Round(deck);
     expect(round.turns.length).to.equal(0);
   })
 
@@ -40,7 +40,7 @@ describe('Round', () => {
 
   it('should have a place to store incorrect guesses', () => {
     const round = new Round(deck);
-    expect(round.incorrectGuesses).to.equal([]);
+    expect(round.incorrectGuesses).to.deep.equal([]);
   })
 
   it('should have a current card', () => {
@@ -56,7 +56,13 @@ describe('Round', () => {
 
   it('should have a takeTurn method', () => {
     const round = new Round(deck);
-    expect(round.takeTurn()).to.be.a('function')
+    expect(round.takeTurn).to.be.a('function')
+  })
+
+  it('should create an instance of Turn when guess is made', () => {
+    const round = new Round(deck);
+    round.takeTurn("yes");
+    expect(round.turns[0]).to.be.an.instanceof(Turn);
   })
 
   it('should update turn count each turn', () => {
@@ -67,21 +73,12 @@ describe('Round', () => {
 
   it('should update turn count multiple times', () => {
     const round = new Round(deck);
-    round.takeTurn();
-    round.takeTurn();
-    round.takeTurn();
+    round.takeTurn("yes");
+    round.takeTurn("yes");
+    round.takeTurn("yes");
     expect(round.turns.length).to.equal(3);
   })
 
-  it('should not count more turns than cards in deck', () => {
-    const round = new Round(deck);
-    round.takeTurn();
-    round.takeTurn();
-    round.takeTurn();
-    round.takeTurn();
-    round.takeTurn();
-    expect(round.turns.length).to.equal(4);
-  })
 
   it('should give feedback for correct guess', () => {
     const round = new Round(deck);
@@ -96,16 +93,8 @@ describe('Round', () => {
   it('should store ids of incorrect guesses', () => {
     const round = new Round(deck);
     round.takeTurn("no");
-    expect(round.incorrectGuesses).to.equal([deck.cards[0].id]);
+    expect(round.incorrectGuesses).to.deep.equal([deck.cards[0].id]);
   })
-
-  // When a guess is made, a new Turn instance is created
-  it('should create an instance of Turn when guess is made', () => {
-    const round = new Round(deck);
-    round.takeTurn("yes");
-    expect(round.turns[0]).to.be.an.instanceof(Turn);
-  })
-  // The turns count is updated, regardless of whether the guess is correct or incorrect
 
   it('should update turn count for both correct and incorrect', () => {
     const round = new Round(deck);
@@ -115,11 +104,11 @@ describe('Round', () => {
     expect(round.turns.length).to.equal(3);
   })
 
-  // The next card becomes current card
   it('should update current card to next card', () => {
     const round = new Round(deck);
     round.takeTurn();
-    expect(round.currentCard).to.equal(deck.cards[1]);
+    round.takeTurn();
+    expect(round.currentCard).to.equal(round.deck.cards[1]);
   })
 
   it('calculates precent of correct answers', () => {
