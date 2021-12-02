@@ -5,7 +5,6 @@ const Turn = require('../src/turn');
 const Card = require('../src/Card');
 const Round = require('../src/round');
 const Deck = require('../src/deck');
-const prototypeData = require('../src/data');
 
 describe('Round', () => {
   let cards;
@@ -20,8 +19,6 @@ describe('Round', () => {
     cards = [cardOne, cardTwo, cardThree, cardFour];
     deck = new Deck(cards);
   })
-
-
 
   it('should be a function', () => {
     const round = new Round(deck);
@@ -128,5 +125,6 @@ describe('Round', () => {
     round.takeTurn("yes");
     expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentCorrect()}% of the questions correctly!`);
   })
+
 
 })
