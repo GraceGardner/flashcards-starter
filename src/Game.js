@@ -8,7 +8,6 @@ const Deck = require('../src/deck');
 
 class Game {
   constructor() {
-    this.cards = [];
     this.deck = undefined;
     this.round = undefined;
   }
