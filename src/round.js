@@ -10,7 +10,9 @@ class Round {
   }
 
   returnCurrentCard() {
-    return this.currentCard;
+    if(this.turns.length < this.deck.cards.length){
+      return this.currentCard;
+    }
   }
 
   takeTurn(guess) {
@@ -32,6 +34,7 @@ class Round {
   }
 
   endRound() {
+    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`)
     return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`
   }
 }
